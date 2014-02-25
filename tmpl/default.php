@@ -13,5 +13,8 @@ $randomSponsor = rand(0,count($sponsors)-1);
 
 echo '<img src="./hbdata/images/sponsors/'.$sponsors[$randomSponsor]->logo.'" alt="'.$sponsors[$randomSponsor]->name.'" />';
 
+if (!empty($info)) {
+	echo '<p>'.$info.'</p';
+}
 
 echo "</div>";

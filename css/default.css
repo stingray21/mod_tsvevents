@@ -6,14 +6,22 @@ div.sponsorBox {
 	}
 
 div.sponsorBox img {
-	width: 100%;
+	width: 96%;
 	display: block; 
-	margin: 5px;
+	margin: 2%;
 	}
 
 div.sponsorBox.allSponsors img {
 	width: 46%;
-	display: block; 
-	margin: 2%;
 	float: left;
+	}
+div.sponsorBox.allSponsors {
+	float: left;
+	}
+
+div.sponsorBox p {
+	width: 96%; 
+	margin: 2%;
+	font-size: 0.8em;
+	text-align: justify;
 	}

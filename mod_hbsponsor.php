@@ -3,7 +3,12 @@
 defined('_JEXEC') or die('Direct Access to this location is not allowed.');
 
 //This is the parameter we get from our xml file above
-$displayMode = $params->get('displayMode');
+$selectedSponsor = $params->get('sponsor');
+$displayMode = null;
+if ($selectedSponsor === 'all') {
+	$displayMode = $params->get('displayMode');
+}
+$info = $params->get('info');
 
 // get parameter from component menu item
 $menuitemid = JRequest::getInt('Itemid');
@@ -17,6 +22,7 @@ if ($menuitemid)
 
 // Include the syndicate functions only once
 require_once dirname(__FILE__).'/helper.php';
+$sponsors = getSponsorArray($selectedSponsor);
 
 //Returns the path of the layout file
 switch ($displayMode)
