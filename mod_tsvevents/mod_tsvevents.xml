@@ -55,10 +55,9 @@
 		<folder>images</folder>
 	</media>
 
-	<languages>
-		<!-- Any language files included with the module -->
-		<language tag="de-DE">language/de-DE.mod_tsvevents.ini</language>
-	</languages>
+	<languages folder="language">
+		<language tag="de-DE">de-DE/de-DE.mod_tsvevents.ini</language>
+    </languages>
 
 	<!-- Optional parameters -->
 	<config>
