@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         'string-replace': {
             version: {
                 files: {
-                    './mod_tsvevents/': './mod_tsvevents/mod_tsvevents.xml',
+                    './mod_tsvevents/': './mod_tsvevents/mod_tsvevents.xml',    // 'a': 'b' means b is source file and a is destination file 
                 },
                 options: {
                     replacements: [{
@@ -31,6 +31,11 @@ module.exports = function(grunt) {
                         }]
                 }
             }
+        },
+        version: {
+            project: {
+                src: ['package.json']
+                }
         },
         compress: {
             main: {
@@ -51,6 +56,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-sync');
     grunt.loadNpmTasks('grunt-string-replace');
+    grunt.loadNpmTasks('grunt-version');
 
     // grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -64,8 +70,9 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('default', ['compress']);
-    grunt.registerTask('build', ['sync:mod_tsvevents']);
-    grunt.registerTask('test', ['string-replace:version']);
+    grunt.registerTask('build_patch', ['sync:mod_tsvevents', 'version::patch', 'string-replace:version', 'compress']);
+    grunt.registerTask('build_minor', ['sync:mod_tsvevents', 'version::minor', 'string-replace:version', 'compress']);
+    grunt.registerTask('build_major', ['sync:mod_tsvevents', 'version::major', 'string-replace:version', 'compress']);
 
     // grunt.registerTask('build', ['clean:build', 'concat:main', 'uglify:build', 'sass:build', 'postcss:dist', 'cssmin', 'copy:build', 'copy:buildmin']);
     // grunt.registerTask('dev', ['clean:build', 'concat:main', 'sass:dev', 'postcss:dist', 'copy:dev']);
