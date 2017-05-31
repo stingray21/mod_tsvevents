@@ -2,7 +2,7 @@
 <!DOCTYPE PUBLIC>
 <extension type="module" version="2.5.0" client="site" method="install">
 	<!-- Name of the Module -->
-	<name>TSV Events</name> 
+	<name>TSV Events Module</name> 
 	<!-- Name of the Author -->
 	<author>Jochen Stehle</author> 
 	<!-- Version Date of the Module -->
