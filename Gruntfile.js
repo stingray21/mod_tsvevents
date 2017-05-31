@@ -26,8 +26,12 @@ module.exports = function(grunt) {
                 },
                 options: {
                     replacements: [{
-                        pattern: /<version>.+?<\/version>/g,
-                        replacement: '<version><%= pkg.version %></version>'
+                            pattern: /<version>.+?<\/version>/g,
+                            replacement: '<version><%= pkg.version %></version>'
+                        },
+                        {
+                            pattern: /<creationDate>.+?<\/creationDate>/g,
+                            replacement: '<creationDate><%= pkg.date %></creationDate>'
                         }]
                 }
             }
@@ -40,13 +44,10 @@ module.exports = function(grunt) {
         bumpup: {
             options: {
                 dateformat: 'YYYY-MM-DD HH:mm Z',
-                normalize: false
-            },
-            setters: {
-                // Adds a new setter for `timestamp` property 
-                timestamp: function (old, releaseType, options) {
-                    return +new Date();
-                },
+                normalize: false,
+                updateProps: {
+                    pkg: 'package.json'
+                }
             },
             files: ['package.json']
         },
@@ -69,7 +70,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-sync');
     grunt.loadNpmTasks('grunt-string-replace');
-    grunt.loadNpmTasks('grunt-version');
     grunt.loadNpmTasks('grunt-bumpup');
 
     // grunt.loadNpmTasks('grunt-contrib-uglify');
