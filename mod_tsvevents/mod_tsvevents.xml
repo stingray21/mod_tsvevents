@@ -6,7 +6,7 @@
 	<!-- Name of the Author -->
 	<author>Jochen Stehle</author> 
 	<!-- Version Date of the Module -->
-	<creationDate>2017-05-31 07:34 +00:00</creationDate> 
+	<creationDate>2017-05-31 00:40 PDT</creationDate> 
 	<!-- Copyright information -->
 	<copyright>All rights reserved by Jochen Stehle</copyright> 
 	<!-- License Information -->
@@ -16,7 +16,7 @@
 	<!-- Author's website -->
 	<authorUrl></authorUrl> 
 	<!-- Module version number -->
-	<version>0.1.8</version> 
+	<version>0.1.11</version> 
 	<!-- Description of what the module does -->
 	<description>Provides events of the club</description>
 	

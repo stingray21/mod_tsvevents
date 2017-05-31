@@ -1,7 +1,7 @@
 {
   "name": "mod_tsvevents",
-  "version": "0.1.8",
-  "date": "2017-05-31 07:34 +00:00",
+  "version": "0.1.11",
+  "date": "2017-05-31 00:40 PDT",
   "description": "Joomla! module mod_tsvevents",
   "main": "mod_tsvevents.php",
   "scripts": {

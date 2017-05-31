@@ -49,6 +49,12 @@ module.exports = function(grunt) {
                     pkg: 'package.json'
                 }
             },
+            setters: {
+                // Overwrites setter for `date` property 
+                date: function (old, releaseType, options) {
+                    return grunt.template.today('yyyy-mm-dd HH:MM Z');   // local timezone 
+                },
+            },
             files: ['package.json']
         },
         compress: {
