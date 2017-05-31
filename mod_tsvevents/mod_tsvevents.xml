@@ -16,7 +16,7 @@
 	<!-- Author's website -->
 	<authorUrl></authorUrl> 
 	<!-- Module version number -->
-	<version>0.2.1</version> 
+	<version>0.1.2</version> 
 	<!-- Description of what the module does -->
 	<description>Provides events of the club</description>
 	

@@ -37,6 +37,19 @@ module.exports = function(grunt) {
                 src: ['package.json']
                 }
         },
+        bumpup: {
+            options: {
+                dateformat: 'YYYY-MM-DD HH:mm Z',
+                normalize: false
+            },
+            setters: {
+                // Adds a new setter for `timestamp` property 
+                timestamp: function (old, releaseType, options) {
+                    return +new Date();
+                },
+            },
+            files: ['package.json']
+        },
         compress: {
             main: {
                 options: {
@@ -57,6 +70,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-sync');
     grunt.loadNpmTasks('grunt-string-replace');
     grunt.loadNpmTasks('grunt-version');
+    grunt.loadNpmTasks('grunt-bumpup');
 
     // grunt.loadNpmTasks('grunt-contrib-uglify');
     // grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -70,9 +84,10 @@ module.exports = function(grunt) {
 
 
     grunt.registerTask('default', ['compress']);
-    grunt.registerTask('build_patch', ['sync:mod_tsvevents', 'version::patch', 'string-replace:version', 'compress']);
-    grunt.registerTask('build_minor', ['sync:mod_tsvevents', 'version::minor', 'string-replace:version', 'compress']);
-    grunt.registerTask('build_major', ['sync:mod_tsvevents', 'version::major', 'string-replace:version', 'compress']);
+    // grunt.registerTask('build_patch', ['sync:mod_tsvevents', 'version::patch', 'string-replace:version', 'compress']);
+    // grunt.registerTask('build_minor', ['sync:mod_tsvevents', 'version::minor', 'string-replace:version', 'compress']);
+    // grunt.registerTask('build_major', ['sync:mod_tsvevents', 'version::major', 'string-replace:version', 'compress']);
+    grunt.registerTask('build_patch', ['sync:mod_tsvevents', 'bumpup:patch', 'string-replace:version', 'compress']);
 
     // grunt.registerTask('build', ['clean:build', 'concat:main', 'uglify:build', 'sass:build', 'postcss:dist', 'cssmin', 'copy:build', 'copy:buildmin']);
     // grunt.registerTask('dev', ['clean:build', 'concat:main', 'sass:dev', 'postcss:dist', 'copy:dev']);
