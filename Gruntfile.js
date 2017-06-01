@@ -4,15 +4,15 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         sync: {
-            mod_tsvevents: {
+            source: {
                 files: [{
-                    cwd: '<%= paths.joomla %><%= paths.package %>mod_tsvevents/', // makes all src relative to cwd
+                    cwd: '<%= ext.joomla %><%= ext.package %><%= ext.name %>/', // makes all src relative to cwd
                     //cwd: '../../../xampp/htdocs/handball/hb_joomla3/' + function(){console.log('test'); return 'zzz_packages/';} + 'mod_tsvevents/',
                     //cwd: '../../../xampp/htdocs/handball/hb_joomla3/' + 'zzz_packages/' + 'mod_tsvevents/',
                     src: [
                         '**'
                     ],
-                    dest:  './mod_tsvevents/',  
+                    dest:  './<%= ext.name %>/',  
                 }],
                 pretend: false, // Don't do any IO. Before you run the task with `updateAndDelete` PLEASE MAKE SURE it doesn't remove too much. 
                 verbose: false // Display log messages when copying files 
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         'string-replace': {
             version: {
                 files: {
-                    './mod_tsvevents/': './mod_tsvevents/mod_tsvevents.xml',    // 'a': 'b' means b is source file and a is destination file 
+                    './<%= ext.name %>/': './<%= ext.name %>/<%= ext.name %>.xml',    // 'a': 'b' means b is source file and a is destination file 
                 },
                 options: {
                     replacements: [{
@@ -54,12 +54,12 @@ module.exports = function(grunt) {
         compress: {
             main: {
                 options: {
-                  archive: '../Releases/mod_tsvevents_' + grunt.template.today('yyyymmdd_HHMMss') + '.zip'
+                  archive: '../Releases/<%= ext.name %>_' + grunt.template.today('yyyymmdd_HHMMss') + '.zip'
                 },
                 files: [
                     {
                     expand: true,
-                    cwd: 'mod_tsvevents',
+                    cwd: '<%= ext.name %>',
                     src: '**/*',
                     },
                 ]
@@ -74,8 +74,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-bumpup');
 
     // load path from separate json file that is not synced with git
-    grunt.config.set('paths', grunt.file.readJSON('paths.json'));
-    // --> paths.json => e.g.
+    grunt.config.set('ext', grunt.file.readJSON('ext.json'));
+    // --> ext.json => e.g.
     // {
     //     "joomla": "D:\\xampp\\htdocs\\handball\\hb_joomla3\\",
     //     "package": "zzz_packages/"
@@ -84,21 +84,21 @@ module.exports = function(grunt) {
     /// ------------
 
     grunt.registerTask('default', ['compress']);
-    grunt.registerTask('import', ['run-grunt', 'sync:mod_tsvevents']);
+    grunt.registerTask('import', ['run-grunt', 'sync:source']);
     grunt.registerTask('build_patch', ['bumpup:patch', 'string-replace:version', 'compress']);
     grunt.registerTask('build_minor', ['bumpup:minor', 'string-replace:version', 'compress']);
     grunt.registerTask('build_major', ['bumpup:major', 'string-replace:version', 'compress']);
 
     // run grunt file in joomla folder
     grunt.registerTask('run-grunt', function() {
-        var paths = require('./paths.json');
+        var ext = require('./ext.json');
         // console.log(paths);
         var cb = this.async();
         var child = grunt.util.spawn({
             grunt: true,
-            args: ['build_mod_tsvevents'],
+            args: ['build_' + ext.name],
             opts: {
-                cwd: paths.joomla
+                cwd: ext.joomla
                 }
         }, function(error, result, code) {
           cb();
