@@ -85,9 +85,37 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['compress']);
     grunt.registerTask('import', ['run-grunt', 'sync:source']);
-    grunt.registerTask('build_patch', ['bumpup:patch', 'string-replace:version', 'compress']);
-    grunt.registerTask('build_minor', ['bumpup:minor', 'string-replace:version', 'compress']);
-    grunt.registerTask('build_major', ['bumpup:major', 'string-replace:version', 'compress']);
+
+
+    grunt.registerTask('build_sub', 'Build Joomla extension', function(build) {
+        if (build === undefined) {
+            // grunt.warn('Building patch (build:patch)');
+            grunt.log.writeln('Building patch (build:patch)');
+            build = 'patch';
+        }
+        grunt.log.writeln('Build ' + build + ' version');
+            
+        grunt.task.run('bumpup:' + build);
+        grunt.task.run('string-replace:version');
+        grunt.task.run('compress');
+    });
+
+
+    grunt.registerTask('build', 'Import and build Joomla extension', function(build) {
+        if (build === undefined) {
+            // grunt.warn('Building patch (build:patch)');
+            grunt.log.writeln('Building patch (build:patch)');
+            build = 'patch';
+        }
+        grunt.log.writeln('Build ' + build + ' version');
+        
+        grunt.task.run('import');    
+        grunt.task.run('bumpup:' + build);
+        grunt.task.run('string-replace:version');
+        grunt.task.run('compress');
+    });
+
+
 
     // run grunt file in joomla folder
     grunt.registerTask('run-grunt', function() {
