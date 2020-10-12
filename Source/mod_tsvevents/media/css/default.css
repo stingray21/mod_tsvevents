@@ -9,15 +9,6 @@ a:focus.tsvevent * {
 	text-decoration: none;
 }
 
-div.tsvevent {
-	margin-bottom: 1em;	
-}
-
-div.tsvevent div.topbanner {
-	/* remove colors from module -> template*/
-	background-color: #3771C8;
-	color: #fff;
-}
 
 a:hover.tsvevent div.topbanner *, 
 a:focus.tsvevent div.topbanner * {
@@ -25,12 +16,22 @@ a:focus.tsvevent div.topbanner * {
 	text-decoration: underline;
 }
 
-div.tsvevent span {
+div.mod_tsvevent {
+	margin-bottom: 1em;	
+}
+
+div.mod_tsvevent div.topbanner {
+	/* remove colors from module -> template*/
+	background-color: #3771C8;
+	color: #fff;
+}
+
+div.mod_tsvevent span {
 	/* remove colors from module -> template */
 	display: block;
 }
 
-div.tsvevent span:first-child::before {
+div.mod_tsvevent span:first-child::before {
 	content: '';
 	width: 30px;
 	height: 30px;
@@ -42,51 +43,55 @@ div.tsvevent span:first-child::before {
 	background-size: 150px 30px;
 }
 
-div.tsvevent span.time {
+div.mod_tsvevent span.date,
+div.mod_tsvevent span.time {
 	padding: 0 0 0.25em 45px;
 	display: block;
 	font-weight: bold;
 }
+div.mod_tsvevent span.time {
+	font-weight: normal;
+}
 
-div.tsvevent span.tu:first-child::before {
+div.mod_tsvevent span.tu:first-child::before {
 	background-position: 0 0;
 }
-div.tsvevent span.fb:first-child::before {
+div.mod_tsvevent span.fb:first-child::before {
 	background-position: -30px 0;
 }
-div.tsvevent span.hb:first-child::before {
+div.mod_tsvevent span.hb:first-child::before {
 	background-position: -60px 0;
 }
-div.tsvevent span.la:first-child::before {
+div.mod_tsvevent span.la:first-child::before {
 	background-position: -90px 0;
 }
-div.tsvevent span.vb:first-child::before {
+div.mod_tsvevent span.vb:first-child::before {
 	background-position: -120px 0;
 }
 
-div.tsvevent span.tsv:first-child::before {
+div.mod_tsvevent span.tsv:first-child::before {
 	background-image: url(../images/logo-tsv.png);
 	background-size: 30px;
 }
 
-div.tsvevent h4 {
+div.mod_tsvevent h4 {
 	padding: 0.5em 5px;
 	margin: 0;
 }
 
-div.tsvevent p { 
+div.mod_tsvevent p { 
 	padding: 0 5px 0.25em;
 }
 
-div.tsvevent.vorbei {
+div.mod_tsvevent.vorbei {
 	color: #aaa;	
 }
 
-div.tsvevent.vorbei > span {
+div.mod_tsvevent.vorbei > span {
 	background: rgb(55, 113, 200); /* Fall-back for browsers that don't support rgba */
     background: rgba(55, 113, 200, 0.5);	
 }
 
-div.tsvevent.vorbei > span::before {
+div.mod_tsvevent.vorbei > span::before {
 	opacity: 0.5;
 }

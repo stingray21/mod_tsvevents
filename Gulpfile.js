@@ -43,8 +43,8 @@ const localJoomla = process.env.LOCAL_JOOMLA;
 const remoteJoomla = process.env.FTP_DEST;
 
 // Joomla variables
-const extDir_admin = "administrator/components/";
-const extDir_site = "components/";
+const extDir_admin = "administrator/modules/";
+const extDir_site = "modules/";
 const extDir_media = "media/";
 
 // const localJoomla_dest = localJoomla + extDir + extName + "/";
@@ -130,19 +130,32 @@ function copy_to_local_Joomla_admin_language() {
 
 function getLanguageNewerPath(file) {
 	// log(file);
+	// log('before (newer): '+file);
 	var pattern = /^([a-z]{2}-[A-Z]{2})\.(.*)(\.sys)?(\.ini)$/;
 	langDir = file.replace(pattern, "$1/");
-	file = langDir + file;
+	if (langDir != file) {
+		file = langDir + file;
+	}
+	// log('after (newer): '+ file);
 	return file;
 }
 
 function getLanguagePath(file, dest) {
-	// log(file.path);
+	// log('before: '+file.path);
 	log(c.magenta(file.relative));
 	var pattern = /^([a-z]{2}-[A-Z]{2})\.(.*)(\.sys)?(\.ini)$/;
 	langDir = file.relative.replace(pattern, "$1/");
-	// log(dest + langDir);
+	// log('after: '+ dest + langDir);
 	return dest + langDir;
+}
+
+function copy_to_local_Joomla_site_language() {
+	var src = buildDir + "language/**/*";
+	var dest = localJoomla + 'language/';
+	log(src + " --> " + dest);
+	
+	options = {dest: dest, map: getLanguageNewerPath }
+	return pipeline(gulp.src(src), newer(options), gulp.dest(file => getLanguagePath(file, dest)));
 }
 
 function copy_to_local_Joomla_site() {
@@ -153,14 +166,6 @@ function copy_to_local_Joomla_site() {
 	log(src + " --> " + dest);
 
 	return pipeline(gulp.src(src, src_exclude), newer(dest), gulp.dest(dest));
-}
-function copy_to_local_Joomla_site_language() {
-	var src = buildDir + "language/**/*";
-	var dest = localJoomla + 'language/';
-	log(src + " --> " + dest);
-
-	options = {dest: dest, map: getLanguageNewerPath }
-	return pipeline(gulp.src(src), newer(options), gulp.dest(file => getLanguagePath(file, dest)));
 }
 
 function copy_to_local_Joomla_media() {
@@ -195,7 +200,7 @@ function watch_deploy_local() {
 	gulp.watch(paths.scripts.watch, scripts);
 	gulp.watch(paths.styles.watch, styles);
 	// gulp.watch(buildDir + "**/*", deploy_to_local_Joomla);
-	gulp.watch([buildDir + "site/**/*", '!'+buildDir + "language/**/*", '!'+buildDir + "media/**/*"], gulp.series(copy_to_local_Joomla_site));
+	gulp.watch([buildDir + "**/*", '!'+buildDir + "language/**/*", '!'+buildDir + "media/**/*"], gulp.series(copy_to_local_Joomla_site));
 	gulp.watch(buildDir + "language/**/*", copy_to_local_Joomla_site_language);
 	gulp.watch(buildDir + "media/**/*", copy_to_local_Joomla_media);
 }

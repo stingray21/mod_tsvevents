@@ -15,13 +15,17 @@ JHtml::stylesheet('mod_tsvevents/default.css', array(), true);
 foreach ($events as $event) {
 	//echo __FILE__.'('.__LINE__.'):<pre>'; print_r($event); echo '</pre>';
 	echo '<a class="tsvevent" href="'.$link.'" alt="'.JText::_('MOD_TSVEVENTS_LINK_GOTO').'">';
-	echo '<div class="tsvevent';
+	echo '<div class="mod_tsvevent';
 	echo ($event->vorbei == 1) ? ' vorbei' : '';
 	echo '">';
 	echo '<div class="topbanner">';
 	echo '<span class="'.$event->abteilung.'">';
 	echo JText::_('MOD_TSVEVENTS_DIVISION_'.strtoupper($event->abteilung)).'</span>';
-	echo '<span class="time">'.JHtml::_('date', $event->datum, 'D, d.m.y', $timezone).'</span>';
+	echo '<span class="date">'.JHtml::_('date', $event->datum, 'D, d.m.y', $timezone).'</span>';
+	if ($event->mit_zeit == 1 &&!is_null($event->zeit)) {
+		echo '<span class="time">'.JText::_('MOD_TSVEVENTS_TIME_SEPARATOR').' '
+			.JHtml::_('date', $event->zeit, 'H:i').JText::_('MOD_TSVEVENTS_TIME_UNIT').'</span>';
+	}
 	echo '</div>';
 	echo '<h4>';
 	echo ' '.$event->titel;
