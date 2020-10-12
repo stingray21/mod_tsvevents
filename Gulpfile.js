@@ -333,4 +333,4 @@ exports.zip = zip_release;
 /*
  * Define default task that can be called by just running `gulp` from cli
  */
-exports.default = build;
+exports.default = dev;

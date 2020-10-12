@@ -1,28 +1,26 @@
 div#tsvEventBox {
-	
 }
 
 a.tsvevent,
-a:hover.tsvevent *, 
+a:hover.tsvevent *,
 a:focus.tsvevent * {
 	color: rgb(51, 51, 51);
 	text-decoration: none;
 }
 
-
-a:hover.tsvevent div.topbanner *, 
+a:hover.tsvevent div.topbanner *,
 a:focus.tsvevent div.topbanner * {
 	color: #fff;
 	text-decoration: underline;
 }
 
 div.mod_tsvevent {
-	margin-bottom: 1em;	
+	margin-bottom: 1em;
 }
 
 div.mod_tsvevent div.topbanner {
 	/* remove colors from module -> template*/
-	background-color: #3771C8;
+	background-color: #3771c8;
 	color: #fff;
 }
 
@@ -79,17 +77,21 @@ div.mod_tsvevent h4 {
 	margin: 0;
 }
 
-div.mod_tsvevent p { 
+div.mod_tsvevent p {
 	padding: 0 5px 0.25em;
 }
 
 div.mod_tsvevent.vorbei {
-	color: #aaa;	
+	color: #aaa;
+}
+
+div.mod_tsvevent.vorbei div.topbanner {
+	opacity: 0.7;
 }
 
 div.mod_tsvevent.vorbei > span {
 	background: rgb(55, 113, 200); /* Fall-back for browsers that don't support rgba */
-    background: rgba(55, 113, 200, 0.5);	
+	background: rgba(55, 113, 200, 0.5);
 }
 
 div.mod_tsvevent.vorbei > span::before {
