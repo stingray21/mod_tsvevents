@@ -23,8 +23,13 @@ foreach ($events as $event) {
 	echo JText::_('MOD_TSVEVENTS_DIVISION_'.strtoupper($event->abteilung)).'</span>';
 	echo '<span class="date">'.JHtml::_('date', $event->datum, 'D, d.m.y', $timezone).'</span>';
 	if ($event->mit_zeit == 1 &&!is_null($event->zeit)) {
-		echo '<span class="time">'.JText::_('MOD_TSVEVENTS_TIME_SEPARATOR').' '
-			.JHtml::_('date', $event->zeit, 'H:i').JText::_('MOD_TSVEVENTS_TIME_UNIT').'</span>';
+		// TODO show time but with correct time zone (how to save in DB?)
+		echo '<span class="time">'.JText::_('MOD_TSVEVENTS_TIME_SEPARATOR').' ';
+			// .JHtml::_('date',, 'H:i', $timezone).JText::_('MOD_TSVEVENTS_TIME_UNIT').'</span>';
+		$pattern = '/(\d{2}):(\d{2})(:\d{2})/i';
+		$replacement = '$1:$2';
+		echo preg_replace($pattern, $replacement, $event->zeit).JText::_('MOD_TSVEVENTS_TIME_UNIT');
+		echo '</span>';
 	}
 	echo '</div>';
 	echo '<h4>';
