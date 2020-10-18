@@ -21,10 +21,10 @@ foreach ($events as $event) {
 	echo '<div class="topbanner">';
 	echo '<span class="'.$event->abteilung.'">';
 	echo JText::_('MOD_TSVEVENTS_DIVISION_'.strtoupper($event->abteilung)).'</span>';
-	echo '<span class="date">'.JHtml::_('date', $event->datum, 'D, d.m.y', $timezone).'</span>';
+	echo '<span class="date"> '.JHtml::_('date', $event->datum, 'D, d.m.y', $timezone).'</span>';
 	if ($event->mit_zeit == 1 &&!is_null($event->zeit)) {
 		// TODO show time but with correct time zone (how to save in DB?)
-		echo '<span class="time">'.JText::_('MOD_TSVEVENTS_TIME_SEPARATOR').' ';
+		echo '<span class="time"> '.JText::_('MOD_TSVEVENTS_TIME_SEPARATOR').' ';
 			// .JHtml::_('date',, 'H:i', $timezone).JText::_('MOD_TSVEVENTS_TIME_UNIT').'</span>';
 		$pattern = '/(\d{2}):(\d{2})(:\d{2})/i';
 		$replacement = '$1:$2';
